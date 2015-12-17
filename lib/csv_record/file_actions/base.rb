@@ -13,10 +13,14 @@ module CsvRecord
       attr_accessor :target_class,
                     :path,
                     :attrs,
-                    :existing_file
+                    :existing_file,
+                    :target_instance,
+                    :found_record,
+                    :id
 
-      def initialize(target_class, attrs={})
+      def initialize(target_class, attrs={}, target_instance=nil)
         self.target_class = target_class
+        self.id = target_instance.id if target_instance.present?
         self.attrs = attrs
         self.path = "#{Rails.root}/db/#{target_class.name.downcase.pluralize}.csv"
 
@@ -31,6 +35,19 @@ module CsvRecord
 
       def csv_headers
         existing_file.headers
+      end
+
+      def find_record
+        detect_record
+        raise "Record with id #{id} not exist" unless found_record
+      end
+
+      def detect_record
+        existing_file.each_with_index do |record, index|
+          if record[:id].to_s == id.to_s
+            self.found_record = record
+          end
+        end
       end
 
       def validate!
