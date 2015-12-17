@@ -6,9 +6,10 @@ module CsvRecord
       def destroy
         set_existing_csv
         find_record
-        puts "found_record  #{found_record}"
-        puts "found_record class  #{found_record.class}"
+        existing_file.delete(found_record_csv_index)
+        overwrite_table!
 
+        true # return true once destroyed and not errored
       end
     end
   end

@@ -16,7 +16,8 @@ module CsvRecord
                     :existing_file,
                     :target_instance,
                     :found_record,
-                    :id
+                    :id,
+                    :found_record_csv_index
 
       def initialize(target_class, attrs={}, target_instance=nil)
         self.target_class = target_class
@@ -46,7 +47,14 @@ module CsvRecord
         existing_file.each_with_index do |record, index|
           if record[:id].to_s == id.to_s
             self.found_record = record
+            self.found_record_csv_index = index
           end
+        end
+      end
+
+      def overwrite_table!
+        ::File.open(path, 'w') do |f|
+          f.write(existing_file.to_csv)
         end
       end
 
