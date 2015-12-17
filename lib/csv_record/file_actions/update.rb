@@ -6,6 +6,9 @@ module CsvRecord
       def update
         set_existing_csv
         update_record!
+        overwrite_table!
+
+        attrs
       end
 
       private
