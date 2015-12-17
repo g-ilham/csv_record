@@ -5,9 +5,15 @@ module CsvRecord
     class Base
       MAX_ROWS = 500
 
+      CSV_SETTINGS = {
+        headers: true,
+        header_converters: :symbol
+      }
+
       attr_accessor :target_class,
                     :path,
-                    :attrs
+                    :attrs,
+                    :existing_file
 
       def initialize(target_class, attrs={})
         self.target_class = target_class
@@ -18,6 +24,14 @@ module CsvRecord
       end
 
       private
+
+      def set_existing_csv
+        self.existing_file = CSV.read(path, CSV_SETTINGS)
+      end
+
+      def csv_headers
+        existing_file.headers
+      end
 
       def validate!
         if attrs.is_a?(Hash)
