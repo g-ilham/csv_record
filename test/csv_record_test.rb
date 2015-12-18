@@ -29,12 +29,34 @@ class CsvRecordTest < ActiveSupport::TestCase
     assert_equal last_name, found_record.last_name
   end
 
+  test "update" do
+    clean_csv_file!
+    create_customer!(first_name, last_name)
+
+    created_record = csv_entries.first
+
+    found_record = Customer.find(created_record[:id])
+
+    assert_equal first_name, found_record.first_name
+    assert_equal last_name, found_record.last_name
+
+    found_record.update(first_name: updated_name)
+
+    updated_record = Customer.find(created_record[:id])
+
+    assert_equal updated_name, updated_record.first_name
+  end
+
   def first_name
     "Ilgam"
   end
 
   def last_name
     "Gaysin"
+  end
+
+  def updated_name
+    "Grisha"
   end
 
   def create_customer!(name, sur_name)
