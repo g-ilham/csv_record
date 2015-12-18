@@ -15,5 +15,9 @@ module CsvRecord
     def last
       CsvRecord::Readers::Base.last(self)
     end
+
+    def find(id)
+      CsvRecord::Readers::Base.find(self, id)
+    end
   end
 end

@@ -14,6 +14,10 @@ module CsvRecord
           csv_manager(target_class).last
         end
 
+        def find(target_class, id)
+          csv_manager(target_class).find(id)
+        end
+
         def csv_manager(target_class)
           CsvRecord::FileActions::Finder.new(target_class)
         end

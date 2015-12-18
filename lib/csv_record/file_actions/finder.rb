@@ -21,6 +21,14 @@ module CsvRecord
         last_item = existing_file[existing_file.size - 1]
         target_class.new(last_item)
       end
+
+      def find(target_id)
+        self.id = target_id
+        set_existing_csv
+        find_record
+
+        target_class.new(found_record)
+      end
     end
   end
 end
