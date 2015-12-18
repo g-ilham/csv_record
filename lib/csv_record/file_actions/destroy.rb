@@ -7,9 +7,17 @@ module CsvRecord
         set_existing_csv
         find_record
         existing_file.delete(found_record_csv_index)
-        overwrite_table!
+        update_csv_data_or_delete_table
 
         true # return true once destroyed and not errored
+      end
+
+      def update_csv_data_or_delete_table
+        if existing_file.size > 1
+          overwrite_table!
+        else
+          File.delete(path)
+        end
       end
     end
   end
