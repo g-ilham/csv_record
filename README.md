@@ -121,5 +121,3 @@ c = Customer.last
 ```
 rake
 ```
-
-This project rocks and uses MIT-LICENSE.
