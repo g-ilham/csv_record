@@ -8,7 +8,7 @@ module CsvRecord
         update_record!
         overwrite_table!
 
-        attrs
+        found_record
       end
 
       private

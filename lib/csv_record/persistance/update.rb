@@ -17,7 +17,8 @@ module CsvRecord
       end
 
       def run
-        csv_manager.update
+        created_object_attrs = csv_manager.update
+        target_class.new(created_object_attrs)
       end
     end
   end
