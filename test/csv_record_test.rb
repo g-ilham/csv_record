@@ -47,6 +47,27 @@ class CsvRecordTest < ActiveSupport::TestCase
     assert_equal updated_name, updated_record.first_name
   end
 
+  test "all" do
+    clean_csv_file!
+    create_collection!
+
+    all_customers = Customer.all
+
+    assert_equal 2, all_customers.count
+    assert_equal first_name, all_customers.first.first_name
+    assert_equal "Ilgis", all_customers.last.first_name
+  end
+
+  test "first" do
+    clean_csv_file!
+    create_collection!
+
+    first_customer = Customer.first
+
+    assert_equal first_name, first_customer.first_name
+    assert_equal last_name, first_customer.last_name
+  end
+
   def first_name
     "Ilgam"
   end
