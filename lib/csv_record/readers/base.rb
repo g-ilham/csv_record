@@ -10,6 +10,10 @@ module CsvRecord
           csv_manager(target_class).first
         end
 
+        def last(target_class)
+          csv_manager(target_class).last
+        end
+
         def csv_manager(target_class)
           CsvRecord::FileActions::Finder.new(target_class)
         end

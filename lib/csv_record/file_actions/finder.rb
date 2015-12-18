@@ -15,6 +15,12 @@ module CsvRecord
         set_existing_csv
         target_class.new(existing_file[0])
       end
+
+      def last
+        set_existing_csv
+        last_item = existing_file[existing_file.size - 1]
+        target_class.new(last_item)
+      end
     end
   end
 end

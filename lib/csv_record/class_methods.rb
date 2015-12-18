@@ -11,5 +11,9 @@ module CsvRecord
     def first
       CsvRecord::Readers::Base.first(self)
     end
+
+    def last
+      CsvRecord::Readers::Base.last(self)
+    end
   end
 end
