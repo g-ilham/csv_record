@@ -7,5 +7,9 @@ module CsvRecord
     def all
       CsvRecord::Readers::Base.all(self)
     end
+
+    def first
+      CsvRecord::Readers::Base.first(self)
+    end
   end
 end

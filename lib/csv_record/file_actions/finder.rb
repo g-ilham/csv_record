@@ -10,6 +10,11 @@ module CsvRecord
           target_class.new(csv_record)
         end
       end
+
+      def first
+        set_existing_csv
+        target_class.new(existing_file[0])
+      end
     end
   end
 end
