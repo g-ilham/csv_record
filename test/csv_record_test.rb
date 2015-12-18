@@ -17,6 +17,18 @@ class CsvRecordTest < ActiveSupport::TestCase
     assert_equal last_name, first_record[:last_name]
   end
 
+  test "find" do
+    clean_csv_file!
+    create_collection!
+
+    created_record = csv_entries.first
+
+    found_record = Customer.find(created_record[:id])
+
+    assert_equal first_name, found_record.first_name
+    assert_equal last_name, found_record.last_name
+  end
+
   def first_name
     "Ilgam"
   end
@@ -27,6 +39,11 @@ class CsvRecordTest < ActiveSupport::TestCase
 
   def create_customer!(name, sur_name)
     Customer.create(first_name: name, last_name: sur_name)
+  end
+
+  def create_collection!
+    create_customer!(first_name, last_name)
+    create_customer!("Ilgis", "Ibragimov")
   end
 
   def path_to_file
