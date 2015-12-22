@@ -56,7 +56,7 @@ class CsvRecordTest < ActiveSupport::TestCase
 
     found_record.destroy
 
-    assert_raise Errno::ENOENT do
+    assert_raise CsvRecord::Exceptions::ConnectionError do
       Customer.find(created_record[:id])
     end
   end
