@@ -12,8 +12,10 @@ module CsvRecord
         true # return true once destroyed and not errored
       end
 
+      private
+
       def update_csv_data_or_delete_table
-        if existing_file.size > 1
+        if existing_file.to_a.size > 1
           overwrite_table!
         else
           File.delete(path)
