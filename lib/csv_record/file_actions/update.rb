@@ -17,11 +17,7 @@ module CsvRecord
         find_record
 
         attrs.each do |key, value|
-          if csv_headers.include?(key.to_sym)
-            self.found_record[key.to_sym] = value
-          else
-            raise "#{key} attribute is not present in table"
-          end
+          self.found_record[key.to_sym] = value
         end
       end
     end

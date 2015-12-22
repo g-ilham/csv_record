@@ -6,6 +6,7 @@ module CsvRecord
       def acts_as_csv_record(options = {})
         extend CsvRecord::ClassMethods
         include CsvRecord::InstanceMethods
+        extend CsvRecord::Exceptions
       end
     end
   end
