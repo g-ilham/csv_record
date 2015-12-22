@@ -10,20 +10,21 @@ module CsvRecord
         header_converters: :symbol
       }
 
-      attr_accessor :target_class,
-                    :path,
+      attr_reader :target_class,
+                  :path,
+                  :existing_file,
+                  :target_instance,
+                  :found_record_csv_index
+
+      attr_accessor :id,
                     :attrs,
-                    :existing_file,
-                    :target_instance,
-                    :found_record,
-                    :id,
-                    :found_record_csv_index
+                    :found_record
 
       def initialize(target_class, attrs={}, target_instance=nil)
-        self.target_class = target_class
+        @target_class = target_class
         self.id = target_instance.id if target_instance.present?
         self.attrs = attrs
-        self.path = "#{Rails.root}/db/#{target_class.name.downcase.pluralize}.csv"
+        @path = "#{Rails.root}/db/#{target_class.name.downcase.pluralize}.csv"
 
         validate!
       end
@@ -31,7 +32,7 @@ module CsvRecord
       private
 
       def set_existing_csv
-        self.existing_file = CSV.read(path, CSV_SETTINGS)
+        @existing_file = CSV.read(path, CSV_SETTINGS)
       end
 
       def csv_headers
@@ -46,8 +47,8 @@ module CsvRecord
       def detect_record
         existing_file.each_with_index do |record, index|
           if record[:id].to_s == id.to_s
-            self.found_record = record
-            self.found_record_csv_index = index
+            @found_record = record
+            @found_record_csv_index = index
           end
         end
       end
