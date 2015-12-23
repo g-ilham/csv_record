@@ -5,19 +5,19 @@ module CsvRecord
     end
 
     def all
-      CsvRecord::Readers::Base.all(self)
+      CsvRecord::FileActions::Finder.new(self).all
     end
 
     def first
-      CsvRecord::Readers::Base.first(self)
+      CsvRecord::FileActions::Finder.new(self).first
     end
 
     def last
-      CsvRecord::Readers::Base.last(self)
+      CsvRecord::FileActions::Finder.new(self).last
     end
 
     def find(id)
-      CsvRecord::Readers::Base.find(self, id)
+      CsvRecord::FileActions::Finder.new(self).find(id)
     end
   end
 end
