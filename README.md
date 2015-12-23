@@ -22,9 +22,9 @@ bundle install
 
 ```
 class Customer
-  attr_accessor :id,
-                :first_name,
-                :last_name
+  attr_reader :id,
+              :first_name,
+              :last_name
 
   def initialize(attrs)
     attrs.each do |k, v|
