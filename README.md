@@ -116,6 +116,14 @@ c = Customer.last
  => #<Customer:0x000000053829f8 @first_name="Rashid", @last_name="Burganov", @id="3">
 ```
 
+
+8) Inspect
+
+```
+c = Customer.last.inspect
+ => "#<Customer:0x000000053829f8 @first_name=\"Rashid\", @last_name=\"Burganov\", @id=\"1\">"
+```
+
 #### Тесты
 
 ```

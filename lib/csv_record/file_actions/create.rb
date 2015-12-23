@@ -25,7 +25,7 @@ module CsvRecord
         full_attrs = (attrs.keys.map(&:to_sym) << :id).sort
 
         if full_attrs != csv_headers.sort
-          raise "Attributes not valid"
+          raise attributes_error, "Passed attributes and the attributes in the table do not match"
         end
       end
 
